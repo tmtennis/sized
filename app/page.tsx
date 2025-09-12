@@ -15,10 +15,11 @@ export default function Home() {
                 width={1200}
                 height={800}
                 className="w-full h-auto transition-opacity duration-300"
+                sizes="(max-width: 768px) 100vw, 1200px"
                 priority
               />
               {/* Dark Overlay that disappears on hover */}
-              <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:opacity-0"></div>
+              <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:opacity-0 pointer-events-none"></div>
             </div>
 
             {/* Bottom Text - Below Image */}

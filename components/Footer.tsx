@@ -1,46 +1,42 @@
-import Container from './Container';
+import Link from 'next/link';
+
+const navigation = [
+  { name: 'About', href: '/about' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Press', href: '/press' },
+  { name: 'Contact', href: '/contact' },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-black border-t border-white/10">
-      <Container>
-        <div className="py-12 md:py-16">
-          <div className="flex flex-col space-y-8 md:flex-row md:justify-between md:space-y-0">
-            {/* Navigation */}
-            <nav className="flex flex-wrap gap-6 text-sm">
-              <a
-                href="/about"
-                className="text-white font-normal transition-opacity duration-200 hover:opacity-60"
+    <footer className="py-4 md:py-5 mt-10 md:mt-8">
+      <div className="pl-4 md:pl-8 lg:pl-12 pr-4 md:pr-8 lg:pr-12">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6 md:gap-8">
+          {/* Left: Navigation */}
+          <div className="space-y-0">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="block font-extrabold text-white text-base md:text-lg transition-colors duration-150 hover:text-neutral-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white leading-tight"
               >
-                About
-              </a>
-              <a
-                href="/projects"
-                className="text-white font-normal transition-opacity duration-200 hover:opacity-60"
-              >
-                Projects
-              </a>
-              <a
-                href="/press"
-                className="text-white font-normal transition-opacity duration-200 hover:opacity-60"
-              >
-                Press
-              </a>
-              <a
-                href="/contact"
-                className="text-white font-normal transition-opacity duration-200 hover:opacity-60"
-              >
-                Contact
-              </a>
-            </nav>
-            
-            {/* Copyright */}
-            <div className="text-sm text-white/60">
-              <p>&copy; 2025 SIZED. All rights reserved.</p>
-            </div>
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Right: Info block (right-justified container, left-justified text) */}
+          <div className="md:text-left md:ml-auto">
+            <p className="font-extrabold text-white text-base md:text-lg leading-tight">CURRENT</p>
+            <p className="font-extrabold text-white text-base md:text-lg leading-tight">MAGEN H GALLERY</p>
+            <p className="text-[11px] md:text-xs text-neutral-400 leading-tight">SEPTEMBER 11 TO OCTOBER 10, 2025</p>
           </div>
         </div>
-      </Container>
+
+        <div className="mt-10 md:mt-16 pb-[max(env(safe-area-inset-bottom),0.5rem)]">
+          <p className="text-[11px] md:text-xs text-neutral-400">© SIZED MMXXV. ALL RIGHTS RESERVED.</p>
+        </div>
+      </div>
     </footer>
   );
 }

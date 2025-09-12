@@ -43,7 +43,7 @@ export default function ContactPage() {
     <Container>
       <div className="pt-20 md:pt-24">
         <div className="max-w-4xl">
-          <h1 className="text-white text-xl font-extrabold mb-6 md:mb-8">
+          <h1 className="text-white text-xs font-extrabold mb-6 md:mb-8">
             CONTACT
           </h1>
         </div>

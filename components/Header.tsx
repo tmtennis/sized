@@ -37,7 +37,19 @@ export default function Header() {
       className={`fixed top-0 left-0 right-0 z-50 border-b border-neutral-700 h-16 transition-transform duration-300 ease-in-out bg-black ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}
     >
       <div className="relative h-16">
-        <Link href="/" className="absolute left-4 top-1/2 -translate-y-1/2 font-normal text-white text-xs leading-tight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white z-10">
+        {/* Mobile brand (compact) */}
+        <Link
+          href="/"
+          className="absolute left-4 top-1/2 -translate-y-1/2 md:hidden font-black text-white text-sm leading-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white z-10"
+          aria-label="SIZED home"
+        >
+          SIZED
+        </Link>
+        {/* Desktop tagline */}
+        <Link
+          href="/"
+          className="hidden md:block absolute left-4 top-1/2 -translate-y-1/2 font-normal text-white text-xs leading-tight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white z-10"
+        >
           <span className="font-extrabold">SIZED</span> composes spaces as stories,<br />
           where objects become characters and every encounter feels like a scene unfolding.
         </Link>
@@ -75,10 +87,10 @@ export default function Header() {
       </div>
 
       <div
-        className={`md:hidden absolute left-0 right-0 top-16 backdrop-blur-sm transition-all duration-300 ease-in-out bg-black/95 ${mobileMenuOpen && isVisible ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible'}`}
+        className={`md:hidden absolute left-0 right-0 top-16 backdrop-blur-sm transition-all duration-300 ease-in-out bg-black/95 ${mobileMenuOpen && isVisible ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible'} max-h-[calc(100dvh-64px)] overflow-y-auto`}
       >
         <nav id="mobile-menu" className="border-t border-neutral-700">
-          <div className="px-4 py-6 space-y-4">
+          <div className="px-4 py-6 pb-[max(env(safe-area-inset-bottom),1rem)] space-y-4">
             {navigation.map((item, index) => (
               <Link
                 key={item.name}

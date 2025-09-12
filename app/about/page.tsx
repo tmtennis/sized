@@ -1,41 +1,122 @@
 import Container from '@/components/Container';
-import SectionHeading from '@/components/SectionHeading';
+import CollaboratorsList from '@/components/CollaboratorsList';
+import DescriptionWithHighlights from '@/components/DescriptionWithHighlights';
+import fs from 'fs/promises';
+import path from 'path';
 
-export default function AboutPage() {
+type AboutData = {
+  description: string[]; // paragraphs
+  collaborators: string[];
+};
+
+function parseCSV(text: string): string[][] {
+  const rows: string[][] = [];
+  let current: string[] = [];
+  let field = '';
+  let inQuotes = false;
+
+  // Normalize newlines
+  const s = text.replace(/\r\n/g, '\n');
+  for (let i = 0; i < s.length; i++) {
+    const char = s[i];
+    const next = s[i + 1];
+
+    if (inQuotes) {
+      if (char === '"') {
+        if (next === '"') {
+          // Escaped quote
+          field += '"';
+          i++; // skip next
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        field += char;
+      }
+    } else {
+      if (char === '"') {
+        inQuotes = true;
+      } else if (char === ',') {
+        current.push(field);
+        field = '';
+      } else if (char === '\n') {
+        current.push(field);
+        rows.push(current);
+        current = [];
+        field = '';
+      } else {
+        field += char;
+      }
+    }
+  }
+  // Push last field/row if any
+  if (inQuotes) {
+    // Close any dangling quote for robustness
+    inQuotes = false;
+  }
+  if (field.length > 0 || current.length > 0) {
+    current.push(field);
+    rows.push(current);
+  }
+  return rows;
+}
+
+async function loadAboutData(): Promise<AboutData> {
+  const filePath = path.join(process.cwd(), 'data', 'sized-about.csv');
+  const raw = await fs.readFile(filePath, 'utf8');
+  const rows = parseCSV(raw);
+  if (!rows.length) return { description: [], collaborators: [] };
+
+  const header = rows[0].map(h => h.trim());
+  const aboutIdx = header.findIndex(h => /sized-about/i.test(h));
+  const collabIdx = header.findIndex(h => /sized-collaborators/i.test(h));
+
+  const bodyRows = rows.slice(1);
+  // Get the first non-empty about cell as the full description
+  const aboutCell = bodyRows.find(r => (r[aboutIdx]?.trim().length ?? 0) > 0)?.[aboutIdx] ?? '';
+  const normalized = aboutCell.replace(/\r\n/g, '\n');
+  const paragraphs = normalized
+    .split(/\n\s*\n/) // blank line separated
+    .map(p => p.trim())
+    .filter(Boolean);
+
+  const collaborators = Array.from(
+    new Set(
+      bodyRows
+        .map(r => (r[collabIdx] ?? '').trim())
+        .filter(v => v.length > 0)
+    )
+  );
+
+  return { description: paragraphs, collaborators };
+}
+
+export default async function AboutPage() {
+  const { description, collaborators } = await loadAboutData();
+
   return (
     <Container>
-      <div className="pt-20 md:pt-24 pb-16 md:pb-24">
-        <SectionHeading className="mb-12 md:mb-16">About SIZED</SectionHeading>
-        
-        <div className="max-w-4xl space-y-12 md:space-y-16">
-          <section>
-            <p className="text-white text-lg md:text-xl leading-relaxed mb-8">
-              Founded by Alexander May, SIZED is a curatorial platform and cultural studio dedicated to staging exhibitions and presenting collectible design.
-            </p>
-            <p className="text-white text-base md:text-lg leading-relaxed">
-              Operating at the intersection of art, design, and commerce, SIZED connects brands, artists, and creative communities through thoughtfully conceived environments and immersive experiences.
-            </p>
+  <div className="pt-28 md:pt-32 lg:pt-36 pb-16 md:pb-24 md:h-[calc(100vh-6rem)] md:overflow-hidden">
+        <div className="grid md:grid-cols-12 gap-12 md:gap-16 md:h-full md:min-h-0">
+          {/* Left column: Title + description */}
+          <section className="md:col-span-6 lg:col-span-6 max-w-prose">
+            <h1 className="text-white font-extrabold tracking-tight text-sm mb-4">ABOUT</h1>
+            {description.length === 0 ? (
+              <p className="text-white/70">Content coming soon.</p>
+            ) : (
+              <div className="pr-2 md:pr-4">
+                <DescriptionWithHighlights paragraphs={description} />
+              </div>
+            )}
           </section>
 
-          <section>
-            <h2 className="text-white font-black text-xl md:text-2xl uppercase tracking-tight mb-6">Philosophy</h2>
-            <p className="text-white text-base md:text-lg leading-relaxed mb-6">
-              Working nomadically, SIZED identifies and activates distinctive real estate, historic properties, vacant retail spaces, and architectural landmarks, to create site-specific exhibitions and brand moments that resonate culturally and commercially.
-            </p>
-            <p className="text-white text-base md:text-lg leading-relaxed">
-              Each project foregrounds considered curation and spatial storytelling, with a focus on context, placement, and the evolving role of collectible design in contemporary culture.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-white font-black text-xl md:text-2xl uppercase tracking-tight mb-6">History</h2>
-            <p className="text-white text-base md:text-lg leading-relaxed mb-6">
-              From 2022 to 2024, SIZED operated SIZED STUDIO, a converted 7,000-square-foot theater in Los Angeles that served as a cultural anchor for multidisciplinary exhibitions, collaborations, and brand partnerships.
-            </p>
-            <p className="text-white text-base md:text-lg leading-relaxed">
-              Today, SIZED continues to curate exhibitions and produce cultural activations that bring together innovative brands, influential creatives, and architectural spaces, shaping meaningful narratives around art, design, and objects of lasting value.
-            </p>
-          </section>
+          {/* Right column: Title + collaborators */}
+          <aside className="md:col-span-6 lg:col-span-6 md:border-l md:border-white/10 md:pl-6 lg:pl-8 mt-24 sm:mt-16 md:mt-0 md:h-full md:min-h-0 md:flex md:flex-col">
+            <h2 className="text-white/80 font-black uppercase tracking-tight mb-4 text-sm">Collaborators</h2>
+            <div className="md:flex-1 md:min-h-0">
+              <CollaboratorsList collaborators={collaborators} />
+            </div>
+          </aside>
         </div>
       </div>
     </Container>

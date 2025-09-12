@@ -43,22 +43,22 @@ export default function PressPage() {
       <div className="pt-20 md:pt-24 pb-16 md:pb-24">
         <SectionHeading className="mb-12 md:mb-16">Press</SectionHeading>
         
-        <div className="space-y-16 md:space-y-20">
+  <div className="space-y-16 md:space-y-20 text-xs">
           {/* Press Coverage */}
           <section>
-            <h2 className="text-white font-black text-xl md:text-2xl uppercase tracking-tight mb-8">Coverage</h2>
+            <h2 className="text-white font-black uppercase tracking-tight mb-8 text-sm">Coverage</h2>
             <div className="space-y-12">
               {pressItems.map((item, index) => (
                 <article key={index} className="border-b border-white/10 pb-8 last:border-b-0">
                   <div className="mb-3">
-                    <span className="text-white text-sm font-normal opacity-60">
+                    <span className="text-white font-normal opacity-60">
                       {item.publication} — {item.date}
                     </span>
                   </div>
-                  <h3 className="text-white font-black text-lg md:text-xl tracking-tight mb-4">
+                  <h3 className="text-white font-black tracking-tight mb-4 text-xs">
                     {item.title}
                   </h3>
-                  <p className="text-white text-base md:text-lg leading-relaxed">
+                  <p className="text-white leading-relaxed">
                     {item.excerpt}
                   </p>
                 </article>
@@ -68,19 +68,19 @@ export default function PressPage() {
 
           {/* Awards & Recognition */}
           <section>
-            <h2 className="text-white font-black text-xl md:text-2xl uppercase tracking-tight mb-8">Recognition</h2>
+            <h2 className="text-white font-black uppercase tracking-tight mb-8 text-sm">Recognition</h2>
             <div className="space-y-8">
               {awards.map((award, index) => (
                 <div key={index} className="border-b border-white/10 pb-6 last:border-b-0">
                   <div className="mb-2">
-                    <span className="text-white text-sm font-normal opacity-60">
+                    <span className="text-white font-normal opacity-60">
                       {award.organization} — {award.year}
                     </span>
                   </div>
-                  <h3 className="text-white font-black text-base md:text-lg uppercase tracking-tight mb-2">
+                  <h3 className="text-white font-black uppercase tracking-tight mb-2 text-xs">
                     {award.title}
                   </h3>
-                  <p className="text-white text-sm md:text-base leading-relaxed opacity-80">
+                  <p className="text-white leading-relaxed opacity-80">
                     {award.project}
                   </p>
                 </div>
@@ -90,30 +90,30 @@ export default function PressPage() {
 
           {/* Media Kit */}
           <section>
-            <h2 className="text-white font-black text-xl md:text-2xl uppercase tracking-tight mb-8">Media Kit</h2>
+            <h2 className="text-white font-black uppercase tracking-tight mb-8 text-sm">Media Kit</h2>
             <div className="max-w-3xl space-y-6">
-              <p className="text-white text-base md:text-lg leading-relaxed">
+              <p className="text-white leading-relaxed">
                 For press inquiries, high-resolution images, or additional information about SIZED, please contact our media team.
               </p>
               
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-white font-black text-sm md:text-base uppercase tracking-tight mb-2">Press Contact</h3>
-                  <p className="text-white text-sm md:text-base leading-relaxed">
+                  <h3 className="text-white font-black uppercase tracking-tight mb-2 text-xs">Press Contact</h3>
+                  <p className="text-white leading-relaxed">
                     press@sized.studio
                   </p>
                 </div>
                 
                 <div>
-                  <h3 className="text-white font-black text-sm md:text-base uppercase tracking-tight mb-2">Download Materials</h3>
+                  <h3 className="text-white font-black uppercase tracking-tight mb-2 text-xs">Download Materials</h3>
                   <div className="space-y-2">
-                    <p className="text-white text-sm md:text-base leading-relaxed opacity-80">
+                    <p className="text-white leading-relaxed opacity-80">
                       Brand Guidelines (PDF)
                     </p>
-                    <p className="text-white text-sm md:text-base leading-relaxed opacity-80">
+                    <p className="text-white leading-relaxed opacity-80">
                       High-Resolution Logos
                     </p>
-                    <p className="text-white text-sm md:text-base leading-relaxed opacity-80">
+                    <p className="text-white leading-relaxed opacity-80">
                       Exhibition Photography
                     </p>
                   </div>
@@ -124,12 +124,12 @@ export default function PressPage() {
 
           {/* About SIZED */}
           <section>
-            <h2 className="text-white font-black text-xl md:text-2xl uppercase tracking-tight mb-8">About SIZED</h2>
+            <h2 className="text-white font-black uppercase tracking-tight mb-8 text-sm">About SIZED</h2>
             <div className="max-w-3xl">
-              <p className="text-white text-base md:text-lg leading-relaxed mb-6">
+              <p className="text-white leading-relaxed mb-6">
                 SIZED is a curatorial platform and cultural studio founded by Alexander May. Operating nomadically, SIZED activates distinctive spaces to present collectible design through thoughtfully conceived exhibitions and cultural experiences.
               </p>
-              <p className="text-white text-base md:text-lg leading-relaxed">
+              <p className="text-white leading-relaxed">
                 The platform connects brands, artists, and creative communities through immersive environments that explore the evolving role of collectible design in contemporary culture.
               </p>
             </div>
