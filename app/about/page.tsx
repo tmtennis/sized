@@ -1,4 +1,5 @@
 import Container from '@/components/Container';
+import NoPageScroll from '@/components/NoPageScroll';
 import CollaboratorsList from '@/components/CollaboratorsList';
 import DescriptionWithHighlights from '@/components/DescriptionWithHighlights';
 import fs from 'fs/promises';
@@ -96,6 +97,7 @@ export default async function AboutPage() {
 
   return (
     <Container>
+      <NoPageScroll />
   <div className="pt-28 md:pt-32 lg:pt-36 pb-16 md:pb-24 md:h-[calc(100vh-6rem)] md:overflow-hidden">
         <div className="grid md:grid-cols-12 gap-12 md:gap-16 md:h-full md:min-h-0">
           {/* Left column: Title + description */}

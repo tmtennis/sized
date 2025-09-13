@@ -9,7 +9,7 @@ const navigation = [
 
 export default function Footer() {
   return (
-    <footer className="py-4 md:py-5 mt-10 md:mt-8">
+    <footer className="py-4 md:py-6 mt-16">
       <div className="pl-4 md:pl-8 lg:pl-12 pr-4 md:pr-8 lg:pr-12">
         <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6 md:gap-8">
           {/* Left: Navigation */}
