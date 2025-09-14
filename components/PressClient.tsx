@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 interface PressItem {
   year: string;
@@ -80,7 +80,7 @@ export default function PressClient({ pressItems }: PressClientProps) {
       
       <div className="px-8 md:px-16 lg:px-24 pb-12 md:pb-16">
         <div className="space-y-8">
-          {groupedItems.map(([year, items], yearIndex) => (
+          {groupedItems.map(([year, items]) => (
             <div key={year} className="space-y-3">
               <motion.h2 
                 className="text-lg font-black text-white/40 sticky top-4 z-30 bg-black py-2"

@@ -12,10 +12,6 @@ function mod(n: number, m: number) {
 }
 
 export default function CollaboratorsList({ collaborators }: CollaboratorsListProps) {
-  if (!collaborators || collaborators.length === 0) {
-    return <p className="text-white/60">—</p>;
-  }
-
   const ITEM_HEIGHT = 24; // px, matches h-6/leading-6
   // Responsive visible rows (odd): fewer on mobile
   const [visible, setVisible] = useState(15);
@@ -36,6 +32,10 @@ export default function CollaboratorsList({ collaborators }: CollaboratorsListPr
   const lastLineDirRef = useRef(0);
   const [dragging, setDragging] = useState(false);
 
+  if (!collaborators || collaborators.length === 0) {
+    return <p className="text-white/60">—</p>;
+  }
+
   // Update visible rows on resize for better mobile fit
   useEffect(() => {
     const decide = () => {
@@ -53,7 +53,7 @@ export default function CollaboratorsList({ collaborators }: CollaboratorsListPr
     // Prevent page scroll while interacting with the wheel
     e.preventDefault();
 
-    const mode = (e as any).deltaMode; // 0=pixel, 1=line
+    const mode = (e.nativeEvent as WheelEvent).deltaMode; // 0=pixel, 1=line
     if (mode === 1) {
       // Line mode (mouse wheel notch): throttle to 1 row per physical notch burst
       const dir = Math.sign(e.deltaY);
@@ -150,7 +150,7 @@ export default function CollaboratorsList({ collaborators }: CollaboratorsListPr
       arr.push({ key: `${idx}-${s}`, name: collaborators[idx], s });
     }
     return arr;
-  }, [centerIndex, collaborators.length, HALF]);
+  }, [centerIndex, collaborators, HALF]);
 
   // no resize observer needed; height is explicit using VISIBLE * ITEM_HEIGHT
 

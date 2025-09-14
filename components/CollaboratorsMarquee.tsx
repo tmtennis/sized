@@ -26,10 +26,10 @@ export default function CollaboratorsMarquee({ collaborators, speedPxPerSec = 20
   }, []);
 
   // Duplicate list for seamless looping
-  const loopItems = useMemo(() => {
-    if (!collaborators || collaborators.length === 0) return [] as string[];
-    return [...collaborators, ...collaborators];
-  }, [collaborators]);
+  // const loopItems = useMemo(() => {
+  //   if (!collaborators || collaborators.length === 0) return [] as string[];
+  //   return [...collaborators, ...collaborators];
+  // }, [collaborators]);
 
   // Auto-scroll using a simple loop; reset after one group height
   useAnimationFrame((t, delta) => {

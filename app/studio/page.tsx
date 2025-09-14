@@ -47,7 +47,7 @@ export default function StudioPage() {
               We work with a network of established and emerging talents across disciplines, from furniture designers and ceramicists to architects and spatial designers.
             </p>
             <p className="text-white text-base md:text-lg leading-relaxed">
-              Our collaborative approach ensures each project benefits from diverse perspectives while maintaining a cohesive vision that reflects SIZED's commitment to excellence and innovation.
+              Our collaborative approach ensures each project benefits from diverse perspectives while maintaining a cohesive vision that reflects SIZED&apos;s commitment to excellence and innovation.
             </p>
           </section>
         </div>

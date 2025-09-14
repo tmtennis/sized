@@ -92,7 +92,7 @@ async function getProject(slug: string): Promise<Project | null> {
     const lines = fileContents.split('\n').filter(line => line.trim());
     
     // Find the project in the CSV
-    let projectData: Partial<Project> = {};
+    const projectData: Partial<Project> = {};
     let description = '';
     let isProjectFound = false;
     let isCollectingDescription = false;
