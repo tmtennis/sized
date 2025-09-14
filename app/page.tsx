@@ -1,4 +1,14 @@
 import HeroSlideshow from '@/components/HeroSlideshow';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Home",
+  description: "SIZED composes spaces as stories, where objects become characters and every encounter feels like a scene unfolding. Creating temporary worlds that function like stages.",
+  openGraph: {
+    title: "SIZED - Curatorial Platform & Cultural Studio",
+    description: "SIZED composes spaces as stories, where objects become characters and every encounter feels like a scene unfolding.",
+  },
+};
 
 export default function Home() {
   return (
@@ -7,6 +17,16 @@ export default function Home() {
         {/* Content Section */}
         <div className="px-4 md:px-8">
           <div className="max-w-5xl mx-auto">
+            {/* Tagline - Above Image */}
+            <div className="mb-8">
+              <div className="max-w-lg">
+                <p className="text-white text-xs md:text-sm leading-tight font-normal">
+                  <span className="font-extrabold">SIZED</span> composes spaces as stories,<br />
+                  where objects become characters and every encounter feels like a scene unfolding.
+                </p>
+              </div>
+            </div>
+
             {/* Hero Slideshow: subtle crossfade, no controls */}
             <div className="mb-8">
               <HeroSlideshow

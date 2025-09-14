@@ -45,13 +45,12 @@ export default function Header() {
         >
           SIZED
         </Link>
-        {/* Desktop tagline */}
+        {/* Desktop brand */}
         <Link
           href="/"
-          className="hidden md:block absolute left-4 top-1/2 -translate-y-1/2 font-normal text-white text-xs leading-tight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white z-10"
+          className="hidden md:block absolute left-4 top-1/2 -translate-y-1/2 font-extrabold text-white text-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
         >
-          <span className="font-extrabold">SIZED</span> composes spaces as stories,<br />
-          where objects become characters and every encounter feels like a scene unfolding.
+          SIZED
         </Link>
         
         <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center space-x-8">
@@ -68,9 +67,12 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="hidden md:block font-extrabold text-white text-sm">
+          <Link
+            href="/alexander-may"
+            className="hidden md:block font-extrabold text-white text-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+          >
             ALEXANDER MAY
-          </div>
+          </Link>
 
           <button
             type="button"

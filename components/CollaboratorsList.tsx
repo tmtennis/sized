@@ -193,11 +193,11 @@ export default function CollaboratorsList({ collaborators }: CollaboratorsListPr
           return (
             <div
               key={key}
-              className="absolute left-0 right-0 flex items-center justify-center px-3 md:px-4"
+              className="absolute left-0 right-0 flex items-center justify-start px-6 md:px-8"
               style={{ top: "50%", transform: `translateY(${y - ITEM_HEIGHT / 2}px) translateY(-50%) scale(${scale})`, opacity }}
             >
         <div
-          className={`h-6 leading-6 text-base ${isCenter ? 'font-black' : 'font-normal'} text-white text-center max-w-full`}
+          className={`h-6 leading-6 text-base ${isCenter ? 'font-black' : 'font-normal'} text-white text-left max-w-full pl-2`}
           onClick={() => {
             if (!isCenter && !dragging) {
               setTarget(Math.round(offset) + s);

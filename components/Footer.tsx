@@ -12,7 +12,7 @@ export default function Footer() {
     <footer className="py-4 md:py-6 mt-16">
       <div className="pl-4 md:pl-8 lg:pl-12 pr-4 md:pr-8 lg:pr-12">
         <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6 md:gap-8">
-          {/* Left: Navigation */}
+          {/* Navigation */}
           <div className="space-y-0">
             {navigation.map((item) => (
               <Link
@@ -23,13 +23,6 @@ export default function Footer() {
                 {item.name}
               </Link>
             ))}
-          </div>
-
-          {/* Right: Info block (right-justified container, left-justified text) */}
-          <div className="md:text-left md:ml-auto">
-            <p className="font-extrabold text-white text-base md:text-lg leading-tight">CURRENT</p>
-            <p className="font-extrabold text-white text-base md:text-lg leading-tight">MAGEN H GALLERY</p>
-            <p className="text-[11px] md:text-xs text-neutral-400 leading-tight">SEPTEMBER 11 TO OCTOBER 10, 2025</p>
           </div>
         </div>
 

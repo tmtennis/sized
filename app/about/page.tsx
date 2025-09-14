@@ -4,6 +4,16 @@ import CollaboratorsList from '@/components/CollaboratorsList';
 import DescriptionWithHighlights from '@/components/DescriptionWithHighlights';
 import fs from 'fs/promises';
 import path from 'path';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "About",
+  description: "Learn about SIZED's approach to curatorial practice and cultural programming. Founded by Alexander May, discover our collaborative network of artists, designers, and cultural institutions.",
+  openGraph: {
+    title: "About SIZED",
+    description: "Learn about SIZED's approach to curatorial practice and cultural programming.",
+  },
+};
 
 type AboutData = {
   description: string[]; // paragraphs
@@ -114,7 +124,7 @@ export default async function AboutPage() {
 
           {/* Right column: Title + collaborators */}
           <aside className="md:col-span-6 lg:col-span-6 md:border-l md:border-white/10 md:pl-6 lg:pl-8 mt-24 sm:mt-16 md:mt-0 md:h-full md:min-h-0 md:flex md:flex-col">
-            <h2 className="text-white/80 font-black uppercase tracking-tight mb-4 text-sm">Collaborators</h2>
+            <h2 className="text-white font-extrabold tracking-tight mb-4 text-sm">COLLABORATORS</h2>
             <div className="md:flex-1 md:min-h-0">
               <CollaboratorsList collaborators={collaborators} />
             </div>
