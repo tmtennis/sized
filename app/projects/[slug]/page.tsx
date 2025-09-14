@@ -167,9 +167,10 @@ async function getProjectImages(slug: string): Promise<string[]> {
   }
 }
 
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
-  const project = await getProject(params.slug);
-  const images = await getProjectImages(params.slug);
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const project = await getProject(slug);
+  const images = await getProjectImages(slug);
   
   if (!project) {
     notFound();
@@ -177,7 +178,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
 
   // Get all projects to find the next one
   const allProjects = await getAllProjects();
-  const currentIndex = allProjects.findIndex(p => p.project === params.slug);
+  const currentIndex = allProjects.findIndex(p => p.project === slug);
   const nextProject = allProjects[(currentIndex + 1) % allProjects.length]; // Loop back to first if at end
   
   return (

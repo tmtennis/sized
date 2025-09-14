@@ -12,6 +12,15 @@ function mod(n: number, m: number) {
 }
 
 export default function CollaboratorsList({ collaborators }: CollaboratorsListProps) {
+  // Early return for empty collaborators
+  if (!collaborators || collaborators.length === 0) {
+    return <p className="text-white/60">—</p>;
+  }
+
+  return <CollaboratorsWheel collaborators={collaborators} />;
+}
+
+function CollaboratorsWheel({ collaborators }: { collaborators: string[] }) {
   const ITEM_HEIGHT = 24; // px, matches h-6/leading-6
   // Responsive visible rows (odd): fewer on mobile
   const [visible, setVisible] = useState(15);
@@ -32,10 +41,6 @@ export default function CollaboratorsList({ collaborators }: CollaboratorsListPr
   const lastLineDirRef = useRef(0);
   const [dragging, setDragging] = useState(false);
 
-  if (!collaborators || collaborators.length === 0) {
-    return <p className="text-white/60">—</p>;
-  }
-
   // Update visible rows on resize for better mobile fit
   useEffect(() => {
     const decide = () => {
@@ -48,6 +53,35 @@ export default function CollaboratorsList({ collaborators }: CollaboratorsListPr
     window.addEventListener('resize', decide);
     return () => window.removeEventListener('resize', decide);
   }, []);
+
+  // Smoothly animate offset towards target
+  useEffect(() => {
+    let raf = 0;
+    const tick = () => {
+      const diff = target - offset;
+      // Simple critically-damped-ish easing
+      const step = diff * 0.18;
+      const next = Math.abs(step) < 0.001 ? target : offset + step;
+      setOffset(next);
+      if (next !== target) {
+        raf = requestAnimationFrame(tick);
+      }
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target, offset]);
+
+  // Precompute the indices to render around the center
+  const centerIndex = Math.floor(offset);
+  const frac = offset - centerIndex;
+  const slots = useMemo(() => {
+    const arr: { key: string; name: string; s: number }[] = [];
+    for (let s = -HALF; s <= HALF; s++) {
+      const idx = mod(centerIndex + s, collaborators.length);
+      arr.push({ key: `${idx}-${s}`, name: collaborators[idx], s });
+    }
+    return arr;
+  }, [centerIndex, collaborators, HALF]);
 
   const onWheel = useCallback((e: React.WheelEvent<HTMLDivElement>) => {
     // Prevent page scroll while interacting with the wheel
@@ -102,8 +136,8 @@ export default function CollaboratorsList({ collaborators }: CollaboratorsListPr
   const onPointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
     if (!draggingRef.current) return;
     const dy = startYRef.current - e.clientY; // drag down => negative
-  const delta = dy / ITEM_HEIGHT;
-  setTarget(startOffsetRef.current + delta);
+    const delta = dy / ITEM_HEIGHT;
+    setTarget(startOffsetRef.current + delta);
   }, []);
 
   const onPointerUp = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
@@ -122,37 +156,6 @@ export default function CollaboratorsList({ collaborators }: CollaboratorsListPr
     setTarget((t) => Math.round(t));
     setDragging(false);
   }, []);
-
-  // Smoothly animate offset towards target
-  useEffect(() => {
-    let raf = 0;
-    const tick = () => {
-      const diff = target - offset;
-  // Simple critically-damped-ish easing
-  const step = diff * 0.18;
-      const next = Math.abs(step) < 0.001 ? target : offset + step;
-      setOffset(next);
-      if (next !== target) {
-        raf = requestAnimationFrame(tick);
-      }
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [target, offset]);
-
-  // Precompute the indices to render around the center
-  const centerIndex = Math.floor(offset);
-  const frac = offset - centerIndex;
-  const slots = useMemo(() => {
-    const arr: { key: string; name: string; s: number }[] = [];
-    for (let s = -HALF; s <= HALF; s++) {
-      const idx = mod(centerIndex + s, collaborators.length);
-      arr.push({ key: `${idx}-${s}`, name: collaborators[idx], s });
-    }
-    return arr;
-  }, [centerIndex, collaborators, HALF]);
-
-  // no resize observer needed; height is explicit using VISIBLE * ITEM_HEIGHT
 
   return (
     <div
