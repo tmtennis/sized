@@ -77,7 +77,7 @@ export default function AlexanderMayClient({ content }: AlexanderMayClientProps)
               transition={{ duration: 1, ease: "easeOut" }}
             >
               <a
-                href="https://am-sepia.vercel.app/"
+                href="https://www.alexandermay.ltd/"
                 className="font-extrabold text-white underline decoration-1 underline-offset-4 hover:text-white/80 transition-colors duration-300"
                 target="_blank"
                 rel="noopener noreferrer"
