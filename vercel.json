@@ -1,10 +1,5 @@
 {
   "buildCommand": "npm run build",
   "framework": "nextjs",
-  "public": false,
-  "functions": {
-    "app/**/*.js": {
-      "runtime": "nodejs22.x"
-    }
-  }
+  "public": false
 }
