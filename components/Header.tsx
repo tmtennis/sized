@@ -105,6 +105,19 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
+            
+            {/* Alexander May link for mobile */}
+            <div className="pt-4 border-t border-neutral-700/50">
+              <Link
+                href="/alexander-may"
+                className={`block text-sm font-extrabold transition-all duration-200 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white transform hover:translate-x-1 ${pathname === '/alexander-may' ? 'text-white' : 'text-neutral-300'}`}
+                style={{ transitionDelay: mobileMenuOpen ? `${navigation.length * 50}ms` : '0ms' }}
+                aria-current={pathname === '/alexander-may' ? 'page' : undefined}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                ALEXANDER MAY
+              </Link>
+            </div>
           </div>
         </nav>
       </div>

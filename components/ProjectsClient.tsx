@@ -46,11 +46,11 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-black/80 group-hover:bg-black/0 transition-all duration-500 ease-out" />
+          <div className="absolute inset-0 bg-black/50 md:bg-black/80 md:group-hover:bg-black/0 transition-all duration-500 ease-out" />
           
           {/* Project Information Overlay */}
           <div className="absolute top-20 left-8 md:top-24 md:left-12 lg:top-28 lg:left-16">
-            <div className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out">
+            <div className="text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 ease-out">
               {/* Project Title */}
               <h1 className="text-lg md:text-xl lg:text-2xl xl:text-3xl font-black mb-2 tracking-tight whitespace-nowrap">
                 {project.title}
