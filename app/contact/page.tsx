@@ -41,74 +41,75 @@ export default function ContactPage() {
 
   return (
     <Container>
-      <div className="pt-20 md:pt-24">
+      <div className="pt-20 md:pt-24 min-h-screen">
         <div className="max-w-4xl">
-          <h1 className="text-white text-xs font-extrabold mb-6 md:mb-8">
-            CONTACT
-          </h1>
+          <div className="mb-12 md:mb-16">
+            <h1 className="text-white text-xs font-extrabold tracking-widest">
+              CONTACT
+            </h1>
+            <div className="mt-2 w-12 h-px bg-white/20"></div>
+          </div>
         </div>
-      </div>
       
-      <div className="mt-6 md:mt-8">
-        <div className="max-w-4xl space-y-6">
-          <section>
-            <h3 className="text-white font-black text-[10px] sm:text-xs md:text-sm leading-tight mb-1">General</h3>
-            <p>
-              <a 
-                href="mailto:hello@sized.ltd" 
-                className="text-white text-[10px] sm:text-xs md:text-sm leading-tight transition-opacity duration-200 hover:opacity-70"
-              >
-                hello@sized.ltd
-              </a>
-            </p>
-          </section>
+      <div className="mt-12 md:mt-16">
+        <div className="max-w-4xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+            
+            {/* General Contact */}
+            <section className="group">
+              <h3 className="text-white font-black text-xs md:text-sm leading-tight mb-3 tracking-wide">
+                General
+              </h3>
+              <div className="space-y-2">
+                <a 
+                  href="mailto:info@sized.ltd" 
+                  className="block text-white/80 text-xs md:text-sm leading-relaxed transition-all duration-300 hover:text-white hover:translate-x-1"
+                >
+                  info@sized.ltd
+                </a>
+              </div>
+            </section>
 
-          <section>
-            <h3 className="text-white font-black text-[10px] sm:text-xs md:text-sm leading-tight mb-1">Press</h3>
-            <p>
-              <a 
-                href="mailto:press@sized.ltd" 
-                className="text-white text-[10px] sm:text-xs md:text-sm leading-tight transition-opacity duration-200 hover:opacity-70"
-              >
-                press@sized.ltd
-              </a>
-            </p>
-          </section>
+            {/* Location & Time */}
+            <section className="group">
+              <h3 className="text-white font-black text-xs md:text-sm leading-tight mb-3 tracking-wide">
+                Location
+              </h3>
+              <div className="space-y-2">
+                <p className="text-white/80 text-xs md:text-sm leading-relaxed">New York City</p>
+                <div className="text-white/60 text-xs space-y-1">
+                  <p className="font-mono">{currentDate}</p>
+                  <p className="font-mono">{currentTime}</p>
+                </div>
+              </div>
+            </section>
 
-          <section>
-            <h3 className="text-white font-black text-[10px] sm:text-xs md:text-sm leading-tight mb-1">Partnerships</h3>
-            <p>
-              <a 
-                href="mailto:partnerships@sized.ltd"
-                className="text-white text-[10px] sm:text-xs md:text-sm leading-tight transition-opacity duration-200 hover:opacity-70"
-              >
-                partnerships@sized.ltd
-              </a>
-            </p>
-          </section>
+            {/* Social */}
+            <section className="group">
+              <h3 className="text-white font-black text-xs md:text-sm leading-tight mb-3 tracking-wide">
+                Social
+              </h3>
+              <div className="space-y-2">
+                <a 
+                  href="https://www.instagram.com/sized_ltd/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-white/80 text-xs md:text-sm leading-relaxed transition-all duration-300 hover:text-white hover:translate-x-1"
+                >
+                  Instagram
+                </a>
+              </div>
+            </section>
 
-          <section className="pt-3 border-t border-white/20">
-            <div className="space-y-1">
-              <p className="text-white text-[10px] sm:text-xs md:text-sm leading-tight">Los Angeles</p>
-              <p className="text-white text-[10px] sm:text-xs md:text-sm leading-tight">{currentDate}</p>
-              <p className="text-white text-[10px] sm:text-xs md:text-sm leading-tight">{currentTime}</p>
-            </div>
-          </section>
+          </div>
 
-          <section className="pt-3 border-t border-white/20">
-            <p>
-              <a 
-                href="https://instagram.com/sized"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white text-[10px] sm:text-xs md:text-sm leading-tight transition-opacity duration-200 hover:opacity-70"
-              >
-                Instagram
-              </a>
-            </p>
-          </section>
+          {/* Subtle decorative line */}
+          <div className="mt-16 md:mt-24">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+          </div>
         </div>
       </div>
+    </div>
     </Container>
   );
 }
